@@ -41,7 +41,7 @@ const movieSchema = new mongoose.Schema(
       required: [true, ""],
     },
     runtime: {
-      type: Number,
+      type: Date,
       required: [true, ""],
     },
   },

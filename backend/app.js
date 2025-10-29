@@ -3,7 +3,8 @@ import cors from "cors";
 import { fileURLToPath } from "url";
 import path from "path";
 import morgan from "morgan";
-import { catchError,HandleERROR } from "vanta-api";
+import { catchError, HandleERROR } from "vanta-api";
+import showRouter from "./Routes/Show.js";
 // import { clerkMiddleware } from '@clerk/express'
 
 const __filename = fileURLToPath(import.meta.url);
@@ -15,11 +16,10 @@ app.use(morgan("dev"));
 // app.use(clerkMiddleware())
 // app.use('/uploads',express.static("Public/Uploads"));
 // app.use(exportValidation);
-
-
+app.use("/api/show", showRouter);
 
 app.use((req, res, next) => {
-  return next(new HandleERROR('Not Found', 404));
+  return next(new HandleERROR("Not Found", 404));
 });
-app.use(catchError)
-export default app
+app.use(catchError);
+export default app;

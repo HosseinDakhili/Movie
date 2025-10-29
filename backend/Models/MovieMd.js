@@ -2,6 +2,9 @@ import mongoose from "mongoose";
 
 const movieSchema = new mongoose.Schema(
   {
+    movieId:{
+      type:String
+    },
     title: {
       type: String,
       required: [true, "عنوان فیلم الزامی است"],
@@ -19,7 +22,7 @@ const movieSchema = new mongoose.Schema(
       required: [true, "مسیر تصویر پس‌زمینه الزامی است"],
     },
     release_date: {
-      type: String,
+      type: Date,
       required: [true, "تاریخ انتشار الزامی است"],
     },
     original_language: {

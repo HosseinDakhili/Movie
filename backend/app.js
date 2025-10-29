@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 import path from "path";
 import morgan from "morgan";
 import { catchError,HandleERROR } from "vanta-api";
-
+// import { clerkMiddleware } from '@clerk/express'
 
 const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
@@ -12,6 +12,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(morgan("dev"));
+// app.use(clerkMiddleware())
 // app.use('/uploads',express.static("Public/Uploads"));
 // app.use(exportValidation);
 

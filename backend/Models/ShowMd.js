@@ -4,16 +4,16 @@ const showSchema = new mongoose.Schema(
   {
     movie: {
       type: mongoose.Schema.Types.ObjectId,
-      required: [true, ""],
+      required: [true, "فیلم الزامی است"],
       ref: "Movie",
     },
     showDateTime: {
       type: Date,
-      required: [true, ""],
+      required: [true, "تاریخ و ساعت نمایش الزامی است"],
     },
     showPrice: {
       type: Number,
-      required: [true, ""],
+      required: [true, "قیمت نمایش الزامی است"],
     },
     occupiesSeats: {
       type: Object,

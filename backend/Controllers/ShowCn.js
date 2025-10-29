@@ -11,18 +11,18 @@ export const getNowPlayingMovie = catchAsync(async (req, res, next) => {
   );
   if (!response?.ok) {
     return next(
-      new HandleERROR(`TMDB api Error:${response.status}`, response.status)
+      new HandleERROR(`خطا در TMDB API: ${response.status}`, response.status)
     );
   }
 
   const data = await response.json();
   if (!data.results?.length) {
-    return next(new HandleERROR("", 404));
+    return next(new HandleERROR("فیلمی یافت نشد", 404));
   }
 
   res.status(200).json({
     success: true,
     data: data.results,
-    message: "",
+    message: "عملیات با موفقیت انجام شد",
   });
 });

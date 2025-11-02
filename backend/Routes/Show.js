@@ -1,10 +1,8 @@
-import express from "express";
-import { addShow, getNowPlayingMovie } from "../Controllers/ShowCn.js";
-import { isAdmin } from "../Middlewares/IsAdmin.js";
+// import express from "express";
+// import { isAdmin } from "../Middlewares/IsAdmin.js";
+// import { createShow } from "../Controllers/ShowCn.js";
 
-const showRouter = express.Router();
-showRouter
-  .get("/now-playing",isAdmin,getNowPlayingMovie)
-  .post("/add", isAdmin, addShow);
+// const showRouter = express.Router()
+// showRouter.post('/create',isAdmin,createShow)
 
-export default showRouter;
+// export default showRouter

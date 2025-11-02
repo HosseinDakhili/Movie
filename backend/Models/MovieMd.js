@@ -2,9 +2,7 @@ import mongoose from "mongoose";
 
 const movieSchema = new mongoose.Schema(
   {
-    movieId:{
-      type:String
-    },
+    
     title: {
       type: String,
       required: [true, "عنوان فیلم الزامی است"],
@@ -15,11 +13,11 @@ const movieSchema = new mongoose.Schema(
     },
     poster_path: {
       type: String,
-      required: [true, "مسیر پوستر الزامی است"],
+      
     },
     backdrop_path: {
       type: String,
-      required: [true, "مسیر تصویر پس‌زمینه الزامی است"],
+      
     },
     release_date: {
       type: Date,

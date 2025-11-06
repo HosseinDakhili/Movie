@@ -41,7 +41,7 @@ export const login = catchAsync(async (req, res, next) => {
   });
 });
 
-// ------------------------- ثبت‌نام -------------------------
+
 export const register = catchAsync(async (req, res, next) => {
   const { username = null, password = null } = req.body;
 

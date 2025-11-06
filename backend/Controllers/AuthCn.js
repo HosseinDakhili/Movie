@@ -74,42 +74,6 @@ export const register = catchAsync(async (req, res, next) => {
   });
 });
 
-export const changePassword = catchAsync(async (req, res, next) => {
-  const id = req.userId;
-  const { oldPass = null, newPass = null } = req.body;
-
-  if (!oldPass || !newPass) {
-    return next(new HandleERROR("رمز عبور قبلی و جدید الزامی است", 400));
-  }
-
-  const user = await User.findById(id);
-  if (!user) {
-    return next(new HandleERROR("کاربر یافت نشد", 404));
-  }
-
-  const checkOldPass = await bcryptjs.compare(oldPass, user.password);
-  if (!checkOldPass) {
-    return next(new HandleERROR("رمز عبور قبلی اشتباه است", 400));
-  }
-
-  const passReg = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/);
-  if (!passReg.test(newPass)) {
-    return next(
-      new HandleERROR(
-        "رمز عبور جدید باید حداقل ۸ کاراکتر و شامل حروف بزرگ، کوچک و عدد باشد",
-        400
-      )
-    );
-  }
-
-  user.password = bcryptjs.hashSync(newPass, 12);
-  await user.save();
-
-  return res.status(200).json({
-    success: true,
-    message: "رمز عبور با موفقیت تغییر کرد",
-  });
-});
 
 export const forgetPassword = catchAsync(async (req, res, next) => {
   const { email = null } = req?.body;

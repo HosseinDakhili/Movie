@@ -29,54 +29,54 @@ export const getNowPlayingMovie = catchAsync(async (req, res, next) => {
     message: "عملیات با موفقیت انجام شد",
   });
 });
+
 // ------------------
 
-  export const addShow = catchAsync(async (req, res, next) => {
-    const { movieId, showsInput, showPrice } = req.body;
+export const addShow = catchAsync(async (req, res, next) => {
+  const { movieId, showsInput, showPrice } = req.body;
 
-    let movie = await Movie.findOne({ tmdbId: movieId });
-    if (!movie) {
-      const movieRes = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieId}`,
-        {
-          headers: { Authorization: `Bearer ${process.env.TMDB_API_KEY}` },
-        }
-      );
-      if (!movieRes.ok) {
-        return next(
-          new HandleERROR("خطا در دریافت اطلاعات فیلم", movieRes.status)
-        );
+  let movie = await Movie.findOne({ tmdbId: movieId });
+  if (!movie) {
+    const movieRes = await fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}`,
+      {
+        headers: { Authorization: `Bearer ${process.env.TMDB_API_KEY}` },
       }
-      const movieData = await movieRes.json();
-      const creditsRes = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieId}/credits`,
-        {
-          headers: { Authorization: `Bearer ${process.env.TMDB_API_KEY}` },
-        }
+    );
+    if (!movieRes.ok) {
+      return next(
+        new HandleERROR("خطا در دریافت اطلاعات فیلم", movieRes.status)
       );
-      if (!creditsRes.ok) {
-        return next(
-          new HandleERROR("خطا در دریافت اطلاعات بازیگران", creditsRes.status)
-        );
-      }
-      const creditsData = await creditsRes.json();
-
-      movie = await Movie.create({
-        tmdbId: movieId,
-        title: movieData.title,
-        overview: movieData.overview,
-        poster_path: movieData.poster_path,
-        backdrop_path: movieData.backdrop_path,
-        genres: movieData.genres,
-        // casts: movieData.casts,
-        casts: creditsData.casts,
-        release_date: movieData.release_date,
-        original_language: movieData.original_language,
-        tagline: movieData.tagline || "",
-        runtime: movieData.runtime,
-        vote_average: movieData.vote_average,
-      });
     }
+    const movieData = await movieRes.json();
+    const creditsRes = await fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}/credits`,
+      {
+        headers: { Authorization: `Bearer ${process.env.TMDB_API_KEY}` },
+      }
+    );
+    if (!creditsRes.ok) {
+      return next(
+        new HandleERROR("خطا در دریافت اطلاعات بازیگران", creditsRes.status)
+      );
+    }
+    const creditsData = await creditsRes.json();
+
+    movie = await Movie.create({
+      tmdbId: movieId,
+      title: movieData.title,
+      overview: movieData.overview,
+      poster_path: movieData.poster_path,
+      backdrop_path: movieData.backdrop_path,
+      genres: movieData.genres,
+      casts: creditsData.casts,
+      release_date: movieData.release_date,
+      original_language: movieData.original_language,
+      tagline: movieData.tagline || "",
+      runtime: movieData.runtime,
+      vote_average: movieData.vote_average,
+    });
+  }
 
   const showsToCreate = [];
   showsInput.forEach((show) => {
@@ -102,16 +102,7 @@ export const getNowPlayingMovie = catchAsync(async (req, res, next) => {
 });
 
 // ------------------------
-// export const getShows = catchAsync(async (req, res, next) => {
-//   const shows = await Show.find({ showDateTime: { $gte: new Date() } })
-//     .populate("movie")
-//     .sort({ showDateTime: 1 });
-//   const uniqueShows = new Set(shows.map((show) => show.movie));
-//   res.status(200).json({
-//     success: true,
-//     message: "",
-//   });
-// });
+
 export const getShows = catchAsync(async (req, res, next) => {
   const features = new ApiFeatures(Show, req.query, req.role)
     .filter()
@@ -126,40 +117,15 @@ export const getShows = catchAsync(async (req, res, next) => {
   res.status(200).json({
     success: true,
     ...result,
-    message: "",
+    message: "نمایش‌ها دریافت شدند",
   });
 });
 
-// export const getShow = catchAsync(async (req, res, next) => {
-//   const { movieId } = req.params;
-//   const shows = await Show.find({
-//     movie: movieId,
-//     showDateTime: { $gte: new Date() },
-//   });
-//   const movie = await Movie.findById(movieId);
-//   const dateTime = {};
-//   shows.forEach((show) => {
-//     const date = show.showDateTime.toISOString().split("T")[0];
-//     if (!dateTime[date]) {
-//       dateTime[date] = [];
-//     }
-//     dateTime[date].push({
-//       time: show.showDateTime,
-//       showId: show._id,
-//     });
-//   });
-//   res.status(200).json({
-//     success: true,
-//     movie,
-//     dateTime,
-//   });
-// });
 export const getShow = catchAsync(async (req, res, next) => {
   const { movieId } = req.params;
 
-  
   const features = new ApiFeatures(Show, req.query, req.role)
-    .addManualFilters({ _id:movieId } )
+    .addManualFilters({ _id: movieId })
     .filter()
     .sort()
     .limitFields()
@@ -178,7 +144,6 @@ export const getShow = catchAsync(async (req, res, next) => {
     });
   }
 
-
   const dateTime = {};
   result.data.forEach((show) => {
     const date = show.showDateTime.toISOString().split("T")[0];
@@ -191,7 +156,6 @@ export const getShow = catchAsync(async (req, res, next) => {
     movie: await Movie.findById(movieId),
     dateTime,
     ...result,
-    message: "",
+    message: "اطلاعات نمایش‌ها دریافت شد",
   });
 });
-

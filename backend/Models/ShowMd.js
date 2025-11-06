@@ -15,7 +15,7 @@ const showSchema = new mongoose.Schema(
       type: Number,
       required: [true, "قیمت نمایش الزامی است"],
     },
-    occupiesSeats: {
+    occupiedSeats: {
       type: Object,
       default: {},
     },

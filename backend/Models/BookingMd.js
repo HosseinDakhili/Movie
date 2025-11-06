@@ -4,21 +4,21 @@ const bookingSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      required: [true, ""],
+      required: [true, "شناسه کاربر الزامی است"],
       ref: "User",
     },
     show: {
       type: mongoose.Schema.Types.ObjectId,
-      required: [true, ""],
+      required: [true, "نمایش الزامی است"],
       ref: "Show",
     },
     amount: {
       type: Number,
-      required: [true, ""],
+      required: [true, "مبلغ رزرو الزامی است"],
     },
     bookedSeats: {
       type: Array,
-      required: [true, ""],
+      required: [true, "صندلی‌های رزرو شده الزامی است"],
     },
     isPaid: {
       type: Boolean,

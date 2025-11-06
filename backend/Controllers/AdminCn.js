@@ -21,7 +21,7 @@ export const getDashboardData = catchAsync(async (req, res, next) => {
   res.status(200).json({
     success: true,
     dashboardData,
-    message: "",
+    message: "داده‌های داشبورد دریافت شدند",
   });
 });
 
@@ -36,12 +36,12 @@ export const getAllShows = catchAsync(async (req, res, next) => {
   res.status(200).json({
     success: true,
     result,
-    message: "",
+    message: "تمام نمایش‌ها دریافت شدند",
   });
 });
+
 export const getAllBookings = catchAsync(async (req, res, next) => {
   const features = new ApiFeatures(Booking, req.query, req.role)
-
     .filter()
     .sort({ createdAt: -1 })
     .paginate()
@@ -54,6 +54,6 @@ export const getAllBookings = catchAsync(async (req, res, next) => {
   res.status(200).json({
     success: true,
     result,
-    message: "",
+    message: "تمام رزروها دریافت شدند",
   });
 });

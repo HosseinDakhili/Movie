@@ -10,6 +10,7 @@ import showRouterTmdb from "./Routes/Show_tmdb.js";
 import bookingRouter from "./Routes/Booking.js";
 import adminRouter from "./Routes/Admin.js";
 import exportValidation from "./Middlewares/ExportValidation.js";
+import authRouter from "./Routes/Auth.js";
 // import { clerkMiddleware } from '@clerk/express'
 
 const __filename = fileURLToPath(import.meta.url);
@@ -21,7 +22,8 @@ app.use(morgan("dev"));
 // app.use(clerkMiddleware())
 // app.use('/uploads',express.static("Public/Uploads"));
 // app.use(exportValidation);
-app.use(exportValidation)
+app.use(exportValidation);
+app.use("/api/auth", authRouter);
 app.use("/api/showtmdb", showRouterTmdb);
 app.use("/api/booking", bookingRouter);
 app.use("/api/admin", adminRouter);

@@ -43,7 +43,7 @@ export const login = catchAsync(async (req, res, next) => {
 
 
 export const register = catchAsync(async (req, res, next) => {
-  const { username = null, password = null } = req.body;
+  const { username = null, password = null, email = null } = req.body;
 
   if (!username || !password) {
     return next(new HandleERROR("نام کاربری و رمز عبور الزامی است", 400));
@@ -65,11 +65,12 @@ export const register = catchAsync(async (req, res, next) => {
   }
 
   const hashPassword = bcryptjs.hashSync(password, 12);
-  await User.create({ username, password: hashPassword });
+  await User.create({ username, password: hashPassword,email });
 
   return res.status(200).json({
     success: true,
     message: "ثبت‌نام با موفقیت انجام شد",
+    
   });
 });
 
@@ -110,7 +111,6 @@ export const changePassword = catchAsync(async (req, res, next) => {
   });
 });
 
-// ------------------------- فراموشی رمز عبور -------------------------
 export const forgetPassword = catchAsync(async (req, res, next) => {
   const { email = null } = req?.body;
   if (!email) {

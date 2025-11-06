@@ -16,7 +16,7 @@ const checkSeatsAvailability = async (showId, selectedSeats) => {
 };
 
 export const createBooking = catchAsync(async (req, res, next) => {
-  const { userId } = req; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  const  id = req.userId; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   const { showId, selectedSeats } = req.body;
   const { origin } = req.headers;
 
@@ -29,14 +29,14 @@ export const createBooking = catchAsync(async (req, res, next) => {
   }
 
   const booking = await Booking.create({
-    user: userId,
+    user: id,
     show: showId,
     amount: showData.showPrice * selectedSeats.length,
     bookedSeats: selectedSeats,
   });
 
   selectedSeats.map((seat) => {
-    showData.occupiedSeats[seat] = userId;
+    showData.occupiedSeats[seat] = id;
   });
   showData.markModified("occupiedSeats");
   await showData.save();

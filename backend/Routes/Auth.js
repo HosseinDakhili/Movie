@@ -1,6 +1,6 @@
 import express from "express";
 import {
-    changePassword,
+   
   forgetPassword,
   login,
   register,

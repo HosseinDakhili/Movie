@@ -20,8 +20,9 @@ export const getAllUser = catchAsync(async (req, res, next) => {
 });
 
 export const getOneUser = catchAsync(async (req, res, next) => {
+    const {id} = req.params
   const filters =
-    req?.role === "admin" ? {} : { _id: req.userId };
+    req?.role === "admin" ? {_id:id} : { _id: req.userId };
 
   const features = new ApiFeatures(User, req?.query, req.role)
     .addManualFilters(filters)

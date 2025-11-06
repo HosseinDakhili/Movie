@@ -11,6 +11,7 @@ import bookingRouter from "./Routes/Booking.js";
 import adminRouter from "./Routes/Admin.js";
 import exportValidation from "./Middlewares/ExportValidation.js";
 import authRouter from "./Routes/Auth.js";
+import userRouter from "./Routes/User.js";
 // import { clerkMiddleware } from '@clerk/express'
 
 const __filename = fileURLToPath(import.meta.url);
@@ -22,11 +23,12 @@ app.use(morgan("dev"));
 // app.use(clerkMiddleware())
 // app.use('/uploads',express.static("Public/Uploads"));
 // app.use(exportValidation);
-app.use(exportValidation);
 app.use("/api/auth", authRouter);
+app.use(exportValidation);
 app.use("/api/showtmdb", showRouterTmdb);
 app.use("/api/booking", bookingRouter);
 app.use("/api/admin", adminRouter);
+app.use("/api/user", userRouter);
 
 app.use((req, res, next) => {
   return next(new HandleERROR("Not Found", 404));

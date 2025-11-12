@@ -5,7 +5,7 @@ import { isAdmin } from "../Middlewares/IsAdmin.js";
 const showRouterTmdb = express.Router();
 showRouterTmdb
   .get("/now-playing",getNowPlayingMovie)
-  .post("/add",  addShow)
+  .post("/add",isAdmin,  addShow)
   .get('/all',getShows)
   .get('/:movieId',getShow)
 

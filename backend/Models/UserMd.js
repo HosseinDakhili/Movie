@@ -29,7 +29,8 @@ const userSchema = new mongoose.Schema({
     default: "user",
   },
   favorites: {
-    type: [String],
+    type: [mongoose.Schema.Types.ObjectId],
+    // type: [String],
     default: [],
   },
 });

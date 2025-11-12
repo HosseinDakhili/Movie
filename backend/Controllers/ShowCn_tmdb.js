@@ -34,6 +34,9 @@ export const getNowPlayingMovie = catchAsync(async (req, res, next) => {
 
 export const addShow = catchAsync(async (req, res, next) => {
   const { movieId, showsInput, showPrice } = req.body;
+  if(!movieId || !showsInput || !showPrice){
+    return next(new HandleERROR("wqgfq",400))
+  }
 
   let movie = await Movie.findOne({ tmdbId: movieId });
   if (!movie) {

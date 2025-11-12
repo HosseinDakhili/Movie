@@ -11,6 +11,17 @@
   font-style: normal;
 }
 
+@theme{
+  --color-primary:#F84565;
+  --color-primary-dull:#D63854;
+}
+*{
+  font-family: "vazir", sans-serif;
+  scrollbar-width: thin;
+  scrollbar-color: #787777 #1e1e1e;
+}
 body {
   font-family: "vazir", sans-serif;
+  color: white;
+  background-color: #09090b;
 }

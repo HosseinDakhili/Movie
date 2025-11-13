@@ -1,19 +1,21 @@
 import { Link, useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
-import { MenuIcon, SearchIcon, XIcon } from "lucide-react";
+import { MenuIcon,UserIcon, SearchIcon, XIcon } from "lucide-react";
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+
+//todo line 83
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const { token } = useContext(AuthContext);
-  console.log(token);
+  // console.log(token);
 
   return (
     <nav
       dir="rtl"
-      className="fixed top-0 right-0 z-50 w-full flex items-center justify-between px-6 md:px-16 lg:px-36 py-5 bg-black/80 backdrop-blur"
+      className="fixed top-0 right-0 z-50 w-full flex items-center justify-between px-6 md:px-16 lg:px-36 py-5 bg-inherit backdrop-blur"
     >
       <Link to="/" className="max-md:flex-1">
         <img src={assets.logo} alt="لوگو" className="w-36 h-auto" />
@@ -77,9 +79,9 @@ const Navbar = () => {
 
       <div className="flex items-center gap-8">
         <SearchIcon className="max-md:hidden w-6 h-6 cursor-pointer text-white" />
-        {/* //! handle user icon */}
+        
         {token ? (
-          <div></div>
+          <UserIcon onClick={()=>navigate('/my-bookings')} className="cursor-pointer" />  /** handle classes and links */
         ) : (
           <button
             onClick={() => navigate("/login")}

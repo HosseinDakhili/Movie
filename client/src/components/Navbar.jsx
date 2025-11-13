@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { MenuIcon, SearchIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate()
 
   return (
     <nav
@@ -18,7 +19,7 @@ const Navbar = () => {
        
       <div
         className={`max-md:absolute max-md:top-0 max-md:right-0 z-40 flex flex-col md:flex-row items-center max-md:justify-center gap-8 px-8 py-3 max-md:h-screen md:rounded-full bg-black/90 md:bg-white/10 md:border border-gray-300/20 transition-all duration-300 ${
-          isOpen ? "max-md:w-full" : "max-md:w-0 translate-x-[150px]"
+          isOpen ? "max-md:w-full" : "max-md:w-0 max-md:translate-x-[150px]"
         }`}
       >
         <XIcon
@@ -34,7 +35,7 @@ const Navbar = () => {
 
       <div className="flex items-center gap-8">
         <SearchIcon className="max-md:hidden w-6 h-6 cursor-pointer text-white" />
-        <button className="px-4 py-1 sm:px-7 sm:py-2 bg-primary hover:bg-primary-dull transition rounded-full font-medium cursor-pointer text-white">
+        <button onClick={()=>navigate('/login')} className="px-4 py-1 sm:px-7 sm:py-2 bg-primary hover:bg-primary-dull transition rounded-full font-medium cursor-pointer text-white">
           ورود
         </button>
       </div>

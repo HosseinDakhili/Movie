@@ -7,3 +7,5 @@ const useFormFields = (initialValues = {}) =>{
     }
     return [fields,handleChange]
 }
+
+export default useFormFields

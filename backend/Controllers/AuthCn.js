@@ -45,8 +45,8 @@ export const login = catchAsync(async (req, res, next) => {
 export const register = catchAsync(async (req, res, next) => {
   const { username = null, password = null, email = null } = req.body;
 
-  if (!username || !password) {
-    return next(new HandleERROR("نام کاربری و رمز عبور الزامی است", 400));
+  if (!username || !password ||!email) {
+    return next(new HandleERROR("نام کاربری و رمز عبور و ایمیل الزامی است", 400));
   }
 
   const passReg = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/);

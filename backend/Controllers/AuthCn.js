@@ -45,7 +45,7 @@ export const login = catchAsync(async (req, res, next) => {
 export const register = catchAsync(async (req, res, next) => {
   const { username = null, password = null, email = null } = req.body;
 
-  if (!username || !password ||!email) {
+  if (!username || !password ) {
     return next(new HandleERROR("نام کاربری و رمز عبور و ایمیل الزامی است", 400));
   }
 

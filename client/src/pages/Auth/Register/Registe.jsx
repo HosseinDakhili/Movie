@@ -25,8 +25,8 @@ export default function Register() {
       notify("success", "ثبت نام انجام شد");
       navigate("/login");
     } else {
-      notify("error", "مشکلی رخ داده است");
-      notify("error", response?.message?.error);
+      
+      notify("error", response?.message);
     }
   };
 
@@ -48,13 +48,7 @@ export default function Register() {
           className="w-full px-5 py-3 sm:py-4 rounded-xl border border-gray-700 bg-zinc-800/80 focus:border-primary focus:ring-2 focus:ring-primary/40 text-gray-200 placeholder-gray-400 transition text-base sm:text-lg"
         />
 
-        <input
-          type="email"
-          onChange={handleChange}
-          name="email"
-          placeholder="ایمیل"
-          className="w-full px-5 py-3 sm:py-4 rounded-xl border border-gray-700 bg-zinc-800/80 focus:border-primary focus:ring-2 focus:ring-primary/40 text-gray-200 placeholder-gray-400 transition text-base sm:text-lg"
-        />
+        
 
         <input
           type="password"

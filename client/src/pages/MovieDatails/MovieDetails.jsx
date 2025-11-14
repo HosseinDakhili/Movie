@@ -6,6 +6,7 @@ import { Heart, PlayCircleIcon, StarIcon } from "lucide-react";
 import timeFormat from "../../lib/timeFormat";
 import DateSelect from "./DateSelect/DateSelect";
 import MovieCard from "../Home/FeaturedSection/MovieCard";
+import Loading from "../../components/Loading";
 
 const MovieDetails = () => {
   const navigate = useNavigate();
@@ -13,11 +14,14 @@ const MovieDetails = () => {
   const [show, setShow] = useState(null);
   const getShow = async () => {
     const show = dummyShowsData.find((show) => show._id == id);
-    setShow({
-      movie: show,
-      dateTime: dummyDateTimeData,
-    });
-  };
+    if(show){
+
+      setShow({
+        movie: show,
+        dateTime: dummyDateTimeData,
+      });
+    };
+  }
 
   useEffect(() => {
     getShow();
@@ -96,7 +100,7 @@ const MovieDetails = () => {
       </div>
     </section>
   ) : (
-    <div>درحال بارگذاری</div>
+    <Loading />
   );
 };
 

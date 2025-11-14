@@ -1,20 +1,19 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, PlayCircleIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import BlurCircle from "../../../components/BlurCircle";
-import { dummyShowsData } from "../../../assets/assets";
+import { dummyShowsData, dummyTrailers } from "../../../assets/assets";
 import MovieCard from "./MovieCard";
+import { useState } from "react";
 
 export default function FeaturedSection() {
   const navigate = useNavigate();
-
+  const [currentTrailer,setCurrentTrailer] = useState(dummyTrailers[0])
   return (
     <div dir="rtl" className="px-6 md:px-16 lg:px-24 xl:px-44 overflow-hidden">
       <div className="relative flex items-center justify-between pt-20 pb-10">
         <BlurCircle top="0" left="-80px " />
 
-        <p className="text-gray-300 font-medium text-lg">
-          در حال پخش
-        </p>
+        <p className="text-gray-300 font-medium text-lg">در حال پخش</p>
 
         <button
           onClick={() => navigate("/movies")}
@@ -42,6 +41,8 @@ export default function FeaturedSection() {
           نمایش بیشتر
         </button>
       </div>
+
+      
     </div>
   );
 }
